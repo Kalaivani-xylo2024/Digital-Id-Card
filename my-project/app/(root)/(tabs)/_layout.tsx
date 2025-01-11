@@ -1,8 +1,8 @@
-import { View, Text, Image } from 'react-native'; // Added Image import
-import React from 'react';
-import { Tabs } from 'expo-router';
+import { View, Text, Image } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
 
-import icons from '@/constants/icons'; // Ensure this points to your icons correctly
+import icons from "@/constants/icons"; // Ensure this points to your icons correctly
 
 const TabIcon = ({
   focused,
@@ -14,11 +14,13 @@ const TabIcon = ({
   title: string;
 }) => (
   <View className="flex-1 mt-3 flex flex-col items-center">
+    {/* Icon */}
     <Image
       source={icon}
-      style={{ tintColor: focused ? '#0061ff' : '#666876', width: 24, height: 24 }} // Applied tintColor via styles
+      className={`w-6 h-6 ${focused ? "tint-blue-600" : "tint-gray-500"}`} // Dynamic tint color
     />
-    <Text style={{ color: focused ? '#0061ff' : '#666876', fontSize: 10 }}>
+    {/* Title */}
+    <Text className={`text-xs mt-0  ${focused ? "text-blue-600" : "text-gray-500"}`}>
       {title}
     </Text>
   </View>
@@ -28,54 +30,58 @@ const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: false,
+        tabBarShowLabel: false, // Hides labels (handled by TabIcon)
         tabBarStyle: {
-          backgroundColor: 'white',
-          position: 'absolute',
-          borderTopColor: '#0061FF1A',
+          backgroundColor: "white",
+          position: "absolute",
+          borderTopColor: "#0061FF1A",
           borderTopWidth: 1,
           minHeight: 70,
         },
       }}
     >
+      {/* Home Tab */}
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.home} title="Home" />
-          ), // Used the reusable TabIcon component
+          ),
         }}
       />
-            <Tabs.Screen
+      {/* Profile Tab */}
+      <Tabs.Screen
         name="create_profile"
         options={{
-          title: 'Profile',
+          title: "Profile",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.people} title="Profile" />
-          ), // Used the reusable TabIcon component
+          ),
         }}
       />
-            <Tabs.Screen
+      {/* Card Tab */}
+      <Tabs.Screen
         name="create_card"
         options={{
-          title: 'C-Card',
+          title: "C-Card",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.wallet} title="C-Card" />
-          ), // Used the reusable TabIcon component
+          ),
         }}
       />
-            <Tabs.Screen
+      {/* Settings Tab */}
+      <Tabs.Screen
         name="settings"
         options={{
-          title: 'Settings',
+          title: "Settings",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.phone} title="Settings" />
-          ), // Used the reusable TabIcon component
+          ),
         }}
       />
     </Tabs>
