@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-import nfcImage from "@/assets/nfc-image.png"; // Correctly imported
+// import Images from "@/assets/nfc-image.png"; // Correctly imported
 
 export default function NFCCard() {
   const [name, setName] = useState(""); // State for the name
@@ -17,15 +17,15 @@ export default function NFCCard() {
       {/* Welcome Section */}
       <View className="flex-0 justify-center items-center px-3 py-3 mt-5">
         <Text className="text-2xl font-bold text-gray-800 text-center mb-10">
-          Welcome to Near-field communication
+          Welcome to Near-Field Communication
         </Text>
         <Text className="text-gray-600 text-center text-base">
           Effortlessly connect, share, and track with NFC technology.
         </Text>
       </View>
 
-      {/* Image Section */}
-      <Image source={nfcImage} className="w-5 h-5 object-cover" />
+      {/* Image Section
+      <Image source={Images} className="w-5 h-5 object-cover" /> */}
 
       {/* Main Content */}
       <View className="flex-1 items-center justify-center bg-gray-100 p-5 mb-11">

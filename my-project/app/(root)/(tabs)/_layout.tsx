@@ -17,12 +17,12 @@ const TabIcon = ({
     {/* Icon */}
     <Image
       source={icon}
-      className={`w-6 h-6 ${focused ? "tint-blue-600" : "tint-gray-500"}`} // Dynamic tint color
+      className={`w-5 h-5 ${focused ? "tint-blue-600" : "tint-gray-500"}`} // Dynamic tint color
     />
     {/* Title */}
-    <Text className={`text-xs mt-0  ${focused ? "text-blue-600" : "text-gray-500"}`}>
+    {/* <Text className={`text-xs mt-0  ${focused ? "text-blue-600" : "text-gray-500"}`}>
       {title}
-    </Text>
+    </Text> */}
   </View>
 );
 
@@ -30,13 +30,14 @@ const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: false, // Hides labels (handled by TabIcon)
+        tabBarShowLabel: true, // Hides labels (handled by TabIcon)
         tabBarStyle: {
           backgroundColor: "white",
-          position: "absolute",
+          position: "fixed",
           borderTopColor: "#0061FF1A",
           borderTopWidth: 1,
-          minHeight: 70,
+          minHeight: 60,
+          
         },
       }}
     >
@@ -51,9 +52,10 @@ const TabsLayout = () => {
           ),
         }}
       />
+      
       {/* Profile Tab */}
       <Tabs.Screen
-        name="create_profile"
+        name="CreateProfile"
         options={{
           title: "Profile",
           headerShown: false,
