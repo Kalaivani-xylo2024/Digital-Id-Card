@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-// import Images from "@/assets/nfc-image.png"; // Correctly imported
+import images from "@/constants/images";
 
 export default function NFCCard() {
   const [name, setName] = useState(""); // State for the name
@@ -24,9 +24,10 @@ export default function NFCCard() {
         </Text>
       </View>
 
-      {/* Image Section
-      <Image source={Images} className="w-5 h-5 object-cover" /> */}
-
+      <Image
+          source={images.nfcImage}
+          className="w-40 h-40 ml-36"
+        />
       {/* Main Content */}
       <View className="flex-1 items-center justify-center bg-gray-100 p-5 mb-11">
         {/* Card Container */}

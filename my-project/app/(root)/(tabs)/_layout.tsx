@@ -17,7 +17,7 @@ const TabIcon = ({
     {/* Icon */}
     <Image
       source={icon}
-      className={`w-5 h-5 ${focused ? "tint-blue-600" : "tint-gray-500"}`} // Dynamic tint color
+      className={`w-5 h-5 ${focused ? "tint-blue-1000" : "tint-gray-600"}`} // Dynamic tint color
     />
     {/* Title */}
     {/* <Text className={`text-xs mt-0  ${focused ? "text-blue-600" : "text-gray-500"}`}>
@@ -68,10 +68,10 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="create_card"
         options={{
-          title: "C-Card",
+          title: "Create-Card",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.wallet} title="C-Card" />
+            <TabIcon focused={focused} icon={icons.wallet} title="Create-Card" />
           ),
         }}
       />
