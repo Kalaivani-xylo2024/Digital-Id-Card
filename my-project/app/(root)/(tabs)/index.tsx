@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image,ScrollView } from "react-native";
 import images from "@/constants/images";
 
 export default function NFCCard() {
@@ -8,7 +8,7 @@ export default function NFCCard() {
   const [scanCount, setScanCount] = useState(0); // State for scan count
 
   return (
-    <View className="flex-1 bg-gray-100">
+    <ScrollView className="flex-1 bg-gray-100">
       {/* Header */}
       <View className="bg-blue-600 py-2">
         <Text className="text-white text-center text-xl font-bold">NFC CARD</Text>
@@ -75,7 +75,7 @@ export default function NFCCard() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
