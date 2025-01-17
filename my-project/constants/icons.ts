@@ -32,6 +32,8 @@ import wifi from "@/assets/icons/wifi.png";
 import location from "@/assets/icons/location.png";
 import edit from "@/assets/icons/edit.png";
 import home1 from "@/assets/icons/home1.svg";
+import fb from"@/assets/icons/fb.png";
+import insta from"@/assets/icons/insta.png";
 
 export default {
   google,
@@ -68,4 +70,6 @@ export default {
   location,
   edit,
   home1,
+  fb,
+  insta,
 };

@@ -29,9 +29,9 @@ export default function NFCCard() {
           className="w-40 h-40 ml-36"
         />
       {/* Main Content */}
-      <View className="flex-1 items-center justify-center bg-gray-100 p-5 mb-11">
+      <View className="flex-1 items-center justify-center bg-gray-100 p-5 mb-11 ">
         {/* Card Container */}
-        <View className="bg-white w-11/12 rounded-lg shadow-lg p-6">
+        <View className="bg-white w-11/12 rounded-lg shadow-lg p-6 border border-gray-500">
           {/* Name Input */}
           <Text className="text-gray-800 font-semibold mb-1">Enter Name:</Text>
           <TextInput
@@ -78,3 +78,4 @@ export default function NFCCard() {
     </View>
   );
 }
+
