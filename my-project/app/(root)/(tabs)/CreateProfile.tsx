@@ -1,13 +1,45 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView,Alert } from 'react-native';
 import {Image,TouchableOpacity}from 'react-native';
 import icons from "@/constants/icons";
 
 export default function CreateProfile(){
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [Password,setPassword]=useState('');
+  const [password,setPassword]=useState('');
+ const handleSubmit = async () => {
+  if (!name || !phoneNumber || !email || !password) {
+    Alert.alert("Error", "All fields are required!");
+    return;
+  }
+
+  console.log("Sending data:", { name, phoneNumber, email, password }); // Debugging log
+
+  try {
+    const response = await fetch("http://192.168.0.102:5000/api/profiles", {  // Replace with your IP
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phoneNumber, email, password }),
+    });
+
+    const data = await response.json();
+    console.log("Server response:", data); // Debugging log
+
+    if (response.ok) {
+      Alert.alert("Success", "Profile created successfully!");
+      setName("");
+      setPhone("");
+      setEmail("");
+      setPassword("");
+    } else {
+      Alert.alert("Error", data.error || "Failed to create profile");
+    }
+  } catch (error) {
+    console.log("Fetch Error:", error);
+    Alert.alert("Error", "Could not connect to the server");
+  }
+};
 
   return (
     <ScrollView className="flex-1 p-4 bg-gray-100">
@@ -26,8 +58,8 @@ export default function CreateProfile(){
       <TextInput
         className="border border-gray-300 rounded-lg p-3 mb-3 bg-white mr-7 ml-7"
         placeholder="Phone Number"
-        value={phone}
-        onChangeText={setPhone}
+        value={phoneNumber}
+        onChangeText={(text) => setPhone(text)} 
         keyboardType="phone-pad"
       />
  
@@ -41,18 +73,21 @@ export default function CreateProfile(){
       />
         <TextInput
         className="border border-gray-300 rounded-lg p-3 mb-3 bg-white mr-7 ml-7"
-        placeholder="Password"
-        value={Password}
-        onChangeText={setPassword}
+        placeholder="password"
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+        secureTextEntry
        
       />
      {/* Button */}
    <TouchableOpacity
      className="bg-blue-500 rounded-md py-2 px-4 mr-7 ml-7">
-      <Text className="text-white text-center font-semibold">Save Profile</Text>
+      {/* <Text className="text-white text-center font-semibold">Save Profile </Text> */}
+      <Button title="Submit" onPress={handleSubmit} />
     </TouchableOpacity>
 
-       <Text className='text-center font-bold mt-5'>(or)</Text>
+
+   <Text className='text-center font-bold mt-5'>(or)</Text>
   
 
 {/* Social Media Links */}
@@ -101,6 +136,7 @@ export default function CreateProfile(){
 </ScrollView>          
   );
 };
+
 
 
 

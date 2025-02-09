@@ -1,11 +1,34 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image,ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image,ScrollView ,Alert} from "react-native";
 import images from "@/constants/images";
+
 
 export default function NFCCard() {
   const [name, setName] = useState(""); // State for the name
   const [cardLink, setCardLink] = useState(""); // State for the card link
   const [scanCount, setScanCount] = useState(0); // State for scan count
+
+  // const fetchScanCount = async () => {
+  //   if (!name.trim()) {
+  //     Alert.alert("Validation Error", "Please enter a name to fetch the scan count.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/getScanCount?name=${name}`);
+  //     const data = await response.json();
+
+  //     if (data.success) {
+  //       setScanCount(data.scanCount); // Update scan count state
+  //     } else {
+  //       Alert.alert("Error", data.message || "No record found for the provided name.");
+  //       setScanCount(0); // Reset scan count if no record found
+  //     }
+  //   } catch (error) {
+  //     Alert.alert("Error", "Failed to fetch data from the server.");
+  //     console.error("Fetch error:", error);
+  //   }
+  // };
 
   return (
     <ScrollView className="flex-1 bg-gray-100">
