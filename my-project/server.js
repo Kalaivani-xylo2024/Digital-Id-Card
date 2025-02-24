@@ -18,14 +18,20 @@ const ProfileSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  whatsapp:{type:String},
+  facebook:{type:String},
+  instagram:{type:String}
 });
 
 const Profile = mongoose.model("Profile", ProfileSchema);
 
+const admin = require("firebase-admin");
+admin.initializeApp();
+
 app.post("/api/profiles", async (req, res) => {
   try {
-    const { name, phoneNumber, email, password } = req.body;
-    const newProfile = new Profile({ name, phoneNumber, email, password });
+    const { name, phoneNumber, email, password,whatsapp,facebook,instagram} = req.body;
+    const newProfile = new Profile({ name, phoneNumber, email, password,whatsapp,facebook,instagram});
     await newProfile.save();
     res.status(201).json({ message: "Profile created successfully", profile: newProfile });
   } catch (error) {
@@ -36,3 +42,71 @@ app.post("/api/profiles", async (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
 });
+
+
+// app.post("/api/google-login", async (req, res) => {
+//   try {
+//     const { name, email } = req.body;
+    
+//     if (!name || !email) {
+//       return res.status(400).json({ error: "Missing required fields" });
+//     }
+
+//     console.log("Google Login Request Received:", { name, email });
+
+//     let user = await Profile.findOne({ email });
+
+//     if (!user) {
+//       user = new Profile({ name, email, phoneNumber: "", password: "" });
+//       await user.save();
+//       console.log("New user saved in MongoDB:", user);
+//     } else {
+//       console.log("User already exists:", user);
+//     }
+
+//     res.json({ message: "User saved successfully", user });
+//   } catch (error) {
+//     console.error("Google Login Server Error:", error);
+//     res.status(500).json({ error: "Server error", details: error.message });
+//   }
+// });
+// Get user by name and password
+
+app.get('/api/profile/:name', async (req, res) => {
+  try {
+    const { name,password } = req.params;
+    const user = await User.findOne({ name,password });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Update scan count
+app.post('/api/update-scan-count', async (req, res) => {
+  const { name } = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { name },
+      { $inc: { scanCount: 1 } }, // Increase scan count by 1
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ message: 'Scan count updated', scanCount: user.scanCount });
+  } catch (error) {
+    console.error('Error updating scan count:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
